@@ -10,7 +10,7 @@ module.exports = function(options , callback){
         part: 'snippet',
         key: options.apikey,
         q: options.term,
-        maxResults: (options.items) ? options.items : 20,
+        maxResults: (options.items) ? options.items : 10,
         type: 'video'
     };
     axios.get(BASE_URL , {params})
@@ -22,5 +22,4 @@ module.exports = function(options , callback){
     }).catch(error=>{
         console.log(error);
     });
-//4 didam
 }

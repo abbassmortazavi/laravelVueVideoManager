@@ -1,5 +1,8 @@
 <?php
 
+use App\Mail\ActivationUserAccount;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -9,13 +12,19 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group. Now create something great!!
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/mail' , function(){
+    $user = User::find(1);
+   return new ActivationUserAccount($user);
 });
+Route::get('/', 'GuestController@welcome');
+
+
+Route::get('acctivate-account/{token}' , 'GuestController@verify')->name('acctivate-account');
+
 
 Auth::routes();
 

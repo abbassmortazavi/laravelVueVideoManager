@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Laravel</title>
-        
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    </head>
-    <body>
-       
-        <div class="container-fluid" id="app">
-            <div class="row">
-                <div class="col-md">
-                    <youtup-dashboard></youtup-dashboard>
-                </div>
-            </div>
-        </div>
+@extends('layouts.app')
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-    </body>
-</html>
+
+@section('content')
+<div class="row">
+    <div class="col-md">
+        <h1>My Video Manager</h1>
+        {{-- <youtup-dashboard></youtup-dashboard> --}}
+        {{-- <router-view></router-view> --}}
+    </div>
+</div>
+@endsection

@@ -8,6 +8,7 @@
                 <img v-bind:src="videoImage" alt="" class="card-img-top">
                 <h4 class="card-title">{{ videoTitle }}</h4>
                 <p class="card-text">{{ videoDescription }}</p>
+                <router-link :to="{name: 'youtub-video' , params: {id:videoId , video:video}}" class="btn btn-dark">Show</router-link>
             </div>
             <div class="card-footer text-muted">
                 Footer
@@ -29,11 +30,14 @@ export default {
            
             return this.video.snippet.thumbnails.medium.url;
         },
-        mounted() {
+        videoId(){
+           
+            return this.video.id.videoId;
+        },
+    },
+     mounted() {
             return this.video.snippet.thumbnails.high.url;
         },
-        
-    }
 }
 </script>
 

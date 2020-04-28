@@ -1956,6 +1956,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _comments_CommentWrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comments/CommentWrapper */ "./resources/js/Youtup/comments/CommentWrapper.vue");
+/* harmony import */ var _GetVideos__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GetVideos */ "./resources/js/Youtup/GetVideos.js");
+/* harmony import */ var _GetVideos__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_GetVideos__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1975,6 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1988,14 +1991,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    if (this.$route.params.video === undefined) {
-      this.$router.push('/');
-    }
+    var _this = this;
 
+    /*if (this.$route.params.video === undefined) {
+        this.$router.push('/');
+    }*/
     this.videoId = this.$route.params.id;
     this.url = "https://www.youtube.com/embed/".concat(this.videoId);
-    this.video = this.$route.params.video;
-    console.log(this.$route.params.video);
+    _GetVideos__WEBPACK_IMPORTED_MODULE_1___default()({
+      apikey: 'AIzaSyAL-Iw9JJ2QpucXGYVmOsXZXvrGd55fhvA',
+      videoId: this.videoId
+    }, function (response) {
+      console.log('res', response);
+      _this.video = response[0];
+    }); // this.video = this.$route.params.video;
+    //console.log(this.$route.params.video);
   },
   computed: {}
 });
@@ -2055,7 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
       }, 1);
     },
     imageProgress: function imageProgress(instance, img) {
-      console.log('instance', instance, 'img', img);
+      //console.log('instance' , instance , 'img' , img);
       this.counter++;
 
       if (this.counter == this.videos.length) {
@@ -2118,7 +2128,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.loading = true;
     });
     window.eventBus.$on('searchResultFromYoutup', function (videos) {
-      console.log('search', videos);
+      //console.log('search' , videos);
       _this.loading = false;
       _this.videos = videos;
     });
@@ -2206,7 +2216,7 @@ __webpack_require__.r(__webpack_exports__);
         video_id: this.$route.params.id
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, postData).then(function (response) {
-        console.log(response);
+        //console.log(response);
         window.eventBus.$emit('commentAddEvent', response.data);
         _this.body = '';
       })["catch"](function (error) {
@@ -2214,8 +2224,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  created: function created() {
-    console.log(this.$route.params.id);
+  created: function created() {// console.log(this.$route.params.id);
   }
 });
 
@@ -2262,7 +2271,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/video/comments', {
         video_id: video_id
       }).then(function (response) {
-        console.log(response);
+        //console.log(response);
         _this.comments = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -2280,8 +2289,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.loadComments();
     window.Echo.channel('comments').listen('.comment.created', function (event) {
-      console.log('event', event);
-
+      //console.log('event' , event);
       _this2.handleNewAddCommentAdded(event.comment);
     });
   }
@@ -47905,10 +47913,7 @@ var render = function() {
             {
               staticClass: "btn btn-dark",
               attrs: {
-                to: {
-                  name: "youtub-video",
-                  params: { id: _vm.videoId, video: _vm.video }
-                }
+                to: { name: "youtub-video", params: { id: _vm.videoId } }
               }
             },
             [_vm._v("Show")]
@@ -63149,6 +63154,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Finder_vue_vue_type_template_id_ce822512___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/Youtup/GetVideos.js":
+/*!******************************************!*\
+  !*** ./resources/js/Youtup/GetVideos.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var BASE_URL = 'https://www.googleapis.com/youtube/v3/videos';
+
+module.exports = function (options, callback) {
+  if (!options.apikey) {
+    throw new Error('Youtup Search would require!');
+  }
+
+  var params = {
+    part: 'snippet',
+    key: options.apikey,
+    id: options.videoId,
+    type: 'video'
+  };
+  axios.get(BASE_URL, {
+    params: params
+  }).then(function (response) {
+    if (callback) {
+      callback(response.data.items);
+    }
+
+    console.log(response);
+  })["catch"](function (error) {
+    console.log(error);
+  });
+};
 
 /***/ }),
 

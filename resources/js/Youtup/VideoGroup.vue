@@ -1,18 +1,18 @@
 <template>
     <div class="videoGroup__wrapper row grid">
-        <video-item 
+        <video-item
         v-images-loaded:on.progress="imageProgress"
         v-for="video in videos"
-        :video="video" 
+        :video="video"
         :key="video.id.videoId">
-            
+
         </video-item>
     </div>
 </template>
 <script>
 import Isotope from 'isotope-layout';
 import imagesLoaded from 'vue-images-loaded';
-import VideoItem from './videoItem'; 
+import VideoItem from './videoItem';
 export default {
     props:['videos'],
     components:{
@@ -25,7 +25,7 @@ export default {
         }
     },
     created(){
-        
+
     },
     methods:{
         relayoutTheGrid(){
@@ -38,7 +38,7 @@ export default {
             },1)
         },
         imageProgress(instance , img){
-            console.log('instance' , instance , 'img' , img);
+            //console.log('instance' , instance , 'img' , img);
             this.counter++;
             if(this.counter == this.videos.length){
                 this.relayoutTheGrid();

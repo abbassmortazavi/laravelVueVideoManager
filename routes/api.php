@@ -21,4 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware'=>'auth:api'] , function(){
     Route::post('/video/comments' , 'CommentController@index');
     Route::post('/comment' , 'CommentController@t');
+    Route::get('user/playlist' , 'PlaylistController@index');
+    Route::post('playlist' , 'PlaylistController@index@store');
 });

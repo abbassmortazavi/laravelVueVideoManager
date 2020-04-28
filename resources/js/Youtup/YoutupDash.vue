@@ -8,7 +8,7 @@
         <div v-if="loading">
             Loading...
         </div>
-        
+
     </div>
 </template>
 <script>
@@ -32,7 +32,7 @@ export default {
         });
 
         window.eventBus.$on('searchResultFromYoutup' , videos=>{
-            console.log('search' , videos);
+            //console.log('search' , videos);
             this.loading = false;
             this.videos = videos;
         });

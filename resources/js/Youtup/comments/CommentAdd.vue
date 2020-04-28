@@ -28,7 +28,7 @@ export default {
             };
             Axios.post(url , postData)
             .then(response=>{
-                console.log(response);
+                //console.log(response);
                 window.eventBus.$emit('commentAddEvent' , response.data);
                 this.body = '';
             }).catch(error=>{
@@ -37,7 +37,7 @@ export default {
         }
     },
     created(){
-        console.log(this.$route.params.id);
+       // console.log(this.$route.params.id);
     }
 }
 </script>

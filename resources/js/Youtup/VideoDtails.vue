@@ -14,11 +14,12 @@
         </div>
     </div>
 
-    
-    
+
+
 </template>
 <script>
 import CommentWrapper from './comments/CommentWrapper';
+import GetVideos from './GetVideos';
 export default {
     components:{
         CommentWrapper
@@ -31,18 +32,25 @@ export default {
         }
     },
     created(){
-        if (this.$route.params.video === undefined) {
+        /*if (this.$route.params.video === undefined) {
             this.$router.push('/');
-        }
+        }*/
 
         this.videoId = this.$route.params.id;
         this.url = `https://www.youtube.com/embed/${this.videoId}`;
-        this.video = this.$route.params.video;
-        console.log(this.$route.params.video);
+        GetVideos({
+            apikey: 'AIzaSyAL-Iw9JJ2QpucXGYVmOsXZXvrGd55fhvA',
+            videoId: this.videoId
+        } , response=>{
+            console.log('res' , response);
+            this.video = response[0];
+        });
+        // this.video = this.$route.params.video;
+        //console.log(this.$route.params.video);
     },
     computed:{
-      
+
     }
-    
+
 }
 </script>

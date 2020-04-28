@@ -26,7 +26,7 @@ export default {
             let video_id = this.$route.params.id;
             axios.post('api/video/comments' , {video_id:video_id})
             .then(response=>{
-                console.log(response);
+                //console.log(response);
                 this.comments = response.data;
             }).catch(error=>{
                 console.log(error);
@@ -40,7 +40,7 @@ export default {
         window.eventBus.$on('commentAddEvent' , comment=>this.handleNewAddCommentAdded(comment));
         this.loadComments();
         window.Echo.channel('comments').listen('.comment.created' , event=>{
-            console.log('event' , event);
+            //console.log('event' , event);
             this.handleNewAddCommentAdded(event.comment);
         });
     }

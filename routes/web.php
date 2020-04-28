@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/mail' , function(){
+
     $user = User::find(1);
    return new ActivationUserAccount($user);
 });
+
 Route::get('/', 'GuestController@welcome');
 
 

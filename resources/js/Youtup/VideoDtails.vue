@@ -8,11 +8,21 @@
                 <iframe :src="url" class="embed-responsive-item" frameborder="0"></iframe>
             </div>
         </div>
+
+        <div class="col-sm-8 col-sm-push-2">
+            <CommentWrapper/>
+        </div>
     </div>
+
+    
     
 </template>
 <script>
+import CommentWrapper from './comments/CommentWrapper';
 export default {
+    components:{
+        CommentWrapper
+    },
     data(){
         return{
             videoId: null,
